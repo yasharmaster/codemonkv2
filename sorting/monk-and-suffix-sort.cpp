@@ -2,7 +2,7 @@
 #include <cstdio>
 #include <climits>
 #include <stack>
-#include <vector>
+#include <algorithm>
 #include <string>
 
 #define LOG(x) cerr << "*** " << x << " ***" << endl;
@@ -24,41 +24,22 @@ typedef long long ll;
 
 using namespace std;
 
-typedef vector<ll> vi;
-typedef vector<vector<ll> > vvi;
-
-const int MOD = 1000000007;
-const int MAXN = 100000;
-
-inline void add(ll &a, ll b)
-{
-    a += b;
-    if (a >= MOD) {
-        a -= MOD;
-    }
-}
-
-inline void subtract(ll &a, ll b)
-{
-    a -= b;
-    if (a < 0) {
-        a += MOD;
-    }
-}
-
 int main(){
-	fast_io;
-	if(fopen("tupni.txt", "r")) {
-		freopen("tupni.txt", "r", stdin);
-		freopen("tuptuo.txt", "w", stdout);
-	}
-	ll t;
-	cin >> t;
-	while (t--) {
-	    ll n;
-	    cin >> n;
-
-
-	}
-	return 0;
+    if(fopen("tupni.txt", "r")) {
+        freopen("tupni.txt", "r", stdin);
+        freopen("tuptuo.txt", "w", stdout);
+    }
+    string A;
+    cin>>A;
+    ll k;
+    cin>>k;
+    ll n=A.size();
+    string suffixes[n];
+    suffixes[n-1]=A[n-1];
+    FORD(i,n-2,0){
+        suffixes[i]=A[i]+suffixes[i+1];
+    }
+    sort(suffixes,suffixes+n);
+    cout<<suffixes[k-1];
+    return 0;
 }

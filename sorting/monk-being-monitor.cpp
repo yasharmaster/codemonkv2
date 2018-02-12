@@ -27,23 +27,26 @@ using namespace std;
 typedef vector<ll> vi;
 typedef vector<vector<ll> > vvi;
 
-const int MOD = 1000000007;
-const int MAXN = 100000;
-
-inline void add(ll &a, ll b)
-{
-    a += b;
-    if (a >= MOD) {
-        a -= MOD;
-    }
-}
-
-inline void subtract(ll &a, ll b)
-{
-    a -= b;
-    if (a < 0) {
-        a += MOD;
-    }
+ll height_diff(ll *A, ll n, ll max, ll min){
+	if(min >= max){
+		return -1;
+	}
+	vector<ll> freq(max-min+1,0);
+	REP(i,n){
+		freq[A[i]-min]++;
+	}
+	ll max_freq = INT_MIN, min_freq = INT_MAX;
+	REP(i,max-min+1){
+		if(freq[i]>0){
+			if(freq[i]>max_freq){
+				max_freq = freq[i];
+			}
+			if(freq[i]<min_freq){
+				min_freq = freq[i];
+			}			
+		}
+	}
+	return max_freq-min_freq;
 }
 
 int main(){
@@ -57,8 +60,18 @@ int main(){
 	while (t--) {
 	    ll n;
 	    cin >> n;
-
-
+	    ll A[n];
+	    ll max = INT_MIN, min = INT_MAX;
+	    REP(i,n){
+	    	cin>>A[i];
+	    	if(A[i]>max){
+	    		max = A[i];
+	    	}
+	    	if(A[i]<min){
+	    		min = A[i];
+	    	}
+	    }
+	    cout<<height_diff(A,n,max,min)<<endl;
 	}
 	return 0;
 }

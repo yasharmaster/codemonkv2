@@ -23,42 +23,36 @@ typedef long long ll;
 #define fast_io     ios_base::sync_with_stdio(0);cin.tie(NULL)
 
 using namespace std;
-
-typedef vector<ll> vi;
-typedef vector<vector<ll> > vvi;
-
-const int MOD = 1000000007;
-const int MAXN = 100000;
-
-inline void add(ll &a, ll b)
-{
-    a += b;
-    if (a >= MOD) {
-        a -= MOD;
-    }
+void swap(ll *A, ll *B){
+    ll temp = *A;
+    *A = *B;
+    *B = temp;
 }
-
-inline void subtract(ll &a, ll b)
-{
-    a -= b;
-    if (a < 0) {
-        a += MOD;
-    }
-}
-
+ 
 int main(){
-	fast_io;
-	if(fopen("tupni.txt", "r")) {
-		freopen("tupni.txt", "r", stdin);
-		freopen("tuptuo.txt", "w", stdout);
-	}
-	ll t;
-	cin >> t;
-	while (t--) {
-	    ll n;
-	    cin >> n;
+    fast_io;
+    if(fopen("tupni.txt", "r")) {
+        freopen("tupni.txt", "r", stdin);
+        freopen("tuptuo.txt", "w", stdout);
+    }
+    ll n, k;
+    cin>>n>>k;
+    ll A[n];
+    REP(i,n){
+        cin>>A[i];
+    }
+    
+    REP(i,n){
+        ll temp=A[i], j=i;
+        while(j>0 && A[j]%k<A[j-1]%k){
+            swap(A[j], A[j-1]);
+            j--;
+        }
+        A[j]=temp;
+    }
 
-
-	}
-	return 0;
+    REP(i,n){
+        cout<<A[i] << " ";
+    }
+    return 0;
 }
